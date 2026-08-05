@@ -1,0 +1,157 @@
+{% comment %}
+  Section: Sticky Add to Cart Bar on Scroll
+  Appears at bottom of screen on both Desktop & Mobile when user scrolls down
+{% endcomment %}
+
+<div id="PavanStickyBar" class="pavan-sticky-bar">
+  <div class="pavan-sticky-container">
+    <div class="pavan-sticky-product-info">
+      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="48" height="48" class="pavan-sticky-thumb">
+      <div>
+        <div class="pavan-sticky-title">{{ product.title | default: "Pavan Steamed Puttu Podi" | escape }} (1 Kg)</div>
+        <div class="pavan-sticky-meta">
+          <span class="pavan-sticky-stars">★★★★★</span>
+          <span class="pavan-sticky-price" id="StickyBarPrice">{{ product.selected_or_first_available_variant.price | default: 8900 | money }}</span>
+          <span class="pavan-sticky-mrp">₹99.00</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pavan-sticky-action">
+      <button type="button" class="pavan-sticky-btn">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        <span>ADD TO CART</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pavan-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #ffffff;
+    border-top: 2px solid #1b4332;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+    padding: 10px 16px;
+    transform: translateY(110%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pavan-sticky-bar.is-visible {
+    transform: translateY(0);
+  }
+  .pavan-sticky-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .pavan-sticky-product-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pavan-sticky-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #fff9f0;
+    padding: 3px;
+    border: 1px solid #e5e7eb;
+  }
+  .pavan-sticky-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1f2937;
+    line-height: 1.2;
+  }
+  .pavan-sticky-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .pavan-sticky-stars {
+    color: #f59e0b;
+    font-size: 12px;
+  }
+  .pavan-sticky-price {
+    font-weight: 800;
+    font-size: 16px;
+    color: #1b4332;
+  }
+  .pavan-sticky-mrp {
+    font-size: 12px;
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+  .pavan-sticky-btn {
+    background: #1b4332;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(27, 67, 50, 0.25);
+    transition: all 0.2s ease;
+  }
+  .pavan-sticky-btn:hover {
+    background: #2d6a4f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(27, 67, 50, 0.35);
+  }
+  @media (max-width: 640px) {
+    .pavan-sticky-bar {
+      padding: 8px 12px;
+    }
+    .pavan-sticky-title {
+      font-size: 12px;
+      max-width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pavan-sticky-btn {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var stickyBar = document.getElementById('PavanStickyBar');
+    if (!stickyBar) return;
+
+    window.addEventListener('scroll', function() {
+      var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      if (scrollPosition > 450) {
+        stickyBar.classList.add('is-visible');
+      } else {
+        stickyBar.classList.remove('is-visible');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Sticky Add To Cart Bar",
+  "settings": [],
+  "presets": [
+    { "name": "Sticky Add To Cart Bar" }
+  ]
+}
+{% endschema %}

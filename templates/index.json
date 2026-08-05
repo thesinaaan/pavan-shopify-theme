@@ -1,20 +1,268 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
+    "main_pavan_product_DyHzYd": {
+      "type": "main-pavan-product",
+      "blocks": {
+        "vendor_9RRnjE": {
+          "type": "vendor",
+          "settings": {
+            "text": "PAVAN AGRO FOODS • ALUVA, KERALA"
+          }
+        },
+        "title_phKe4D": {
+          "type": "title",
+          "settings": {
+            "title_text": ""
+          }
+        },
+        "subtitle_bpxnGN": {
+          "type": "subtitle",
+          "settings": {
+            "text": "പാകത്തിൽ സ്റ്റീം ചെയ്ത പ്രീമിയം പുട്ടുപൊടി"
+          }
+        },
+        "price_G8BeFP": {
+          "type": "price",
+          "settings": {
+            "mrp_price": "₹99.00"
+          }
+        },
+        "variant_picker_4cRtxw": {
+          "type": "variant_picker",
+          "settings": {
+            "v1": "1 Kg Pack",
+            "v2": "2 Kg Pack",
+            "v3": "5 Kg Family"
+          }
+        },
+        "quantity_rYBtwa": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "buy_buttons_KFBChd": {
+          "type": "buy_buttons",
+          "settings": {
+            "button_label": "ADD TO CART"
+          }
+        },
+        "delivery_zxUFrn": {
+          "type": "delivery",
+          "settings": {
+            "text": "Estimated Delivery: 2-4 Days | Ships Fresh from Aluva, Kerala"
+          }
+        },
+        "trust_row_kDBUkG": {
+          "type": "trust_row",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_9RRnjE",
+        "title_phKe4D",
+        "subtitle_bpxnGN",
+        "price_G8BeFP",
+        "variant_picker_4cRtxw",
+        "quantity_rYBtwa",
+        "buy_buttons_KFBChd",
+        "delivery_zxUFrn",
+        "trust_row_kDBUkG"
+      ],
+      "name": "Pavan Main Product Hero",
+      "settings": {
+        "show_badge": true,
+        "badge_text": "BESTSELLER",
+        "cert_text": "FSSAI REGISTERED"
+      }
+    },
+    "pavan_why_choose_kLjxyx": {
+      "type": "pavan-why-choose",
+      "name": "Why Choose Pavan",
+      "settings": {
+        "subheading": "AUTHENTIC ADVANTAGE",
+        "heading": "Made for Everyday Kerala Cooking",
+        "description": "Crafted with traditional steam-milling secrets so every breakfast is soft, fluffy, and wholesome."
+      }
+    },
+    "pavan_cooking_instructions_nGRykp": {
+      "type": "pavan-cooking-instructions",
+      "name": "Cooking Instructions",
+      "settings": {
+        "subheading": "AUTHENTIC RECIPE METHOD",
+        "heading": "How to Steam Perfect Pavan Puttu",
+        "description": "Simple step-by-step directions directly from our product package."
+      }
+    },
+    "pavan_serving_suggestions_aRfbFF": {
+      "type": "pavan-serving-suggestions",
+      "blocks": {
+        "pairing_RAewBH": {
+          "type": "pairing",
+          "settings": {
+            "icon": "🍛",
+            "title": "Kadala Curry",
+            "description": "Classic roasted coconut black chickpea curry."
+          }
+        },
+        "pairing_XFptdC": {
+          "type": "pairing",
+          "settings": {
+            "icon": "🍌",
+            "title": "Steamed Nendran",
+            "description": "Sweet ripe Kerala plantain & fine sugar."
+          }
+        },
+        "pairing_rVTeAw": {
+          "type": "pairing",
+          "settings": {
+            "icon": "🧈",
+            "title": "Pure Cow Ghee",
+            "description": "Golden melted ghee drizzled over hot puttu."
+          }
+        },
+        "pairing_ffHajt": {
+          "type": "pairing",
+          "settings": {
+            "icon": "🥥",
+            "title": "Fresh Coconut",
+            "description": "Juicy freshly grated coconut layers."
+          }
+        },
+        "pairing_BU6hjm": {
+          "type": "pairing",
+          "settings": {
+            "icon": "🍳",
+            "title": "Kerala Egg Roast",
+            "description": "Rich caramelized onion & egg gravy."
+          }
+        }
+      },
+      "block_order": [
+        "pairing_RAewBH",
+        "pairing_XFptdC",
+        "pairing_rVTeAw",
+        "pairing_ffHajt",
+        "pairing_BU6hjm"
+      ],
+      "name": "Serving Suggestions",
+      "settings": {
+        "subheading": "AUTHENTIC PAIRINGS",
+        "heading": "Traditional Kerala Serving Ideas",
+        "description": "Elevate your morning table with these timeless Kerala pairings."
+      }
+    },
+    "pavan_product_details_bKWfXy": {
+      "type": "pavan-product-details",
+      "name": "Product Details",
+      "settings": {
+        "subheading": "FULL TRANSPARENCY",
+        "heading": "Product Specifications & Package Details",
+        "description": "Inspect exact ingredients, nutritional profile, and manufacturer licenses."
+      }
+    },
+    "pavan_comparison_etKJKp": {
+      "type": "pavan-comparison",
+      "name": "Product Comparison",
+      "settings": {
+        "subheading": "THE UNMATCHED STANDARD",
+        "heading": "Pavan vs Standard Store Brands",
+        "description": "See why Kerala families choose Pavan for their daily authentic breakfast."
+      }
+    },
+    "pavan_certifications_KJDWNe": {
+      "type": "pavan-certifications",
+      "name": "Quality & Certifications",
+      "settings": {
+        "subheading": "LAB TESTED & CERTIFIED",
+        "heading": "Tested to Perfection",
+        "description": "Full transparency with published Certificate of Analysis lab reports for every production batch."
+      }
+    },
+    "pavan_faq_Uzdjx4": {
+      "type": "pavan-faq",
+      "blocks": {
+        "faq_item_94mxRD": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I cook Pavan Steamed Puttu Podi?",
+            "answer": "Mix 1 glass of Pavan Puttu Podi with 1 glass of lukewarm water and salt. Mix gently until crumbly, rest for 15-20 minutes, then layer with fresh grated coconut into a puttu kutti and steam for 5-7 minutes."
+          }
+        },
+        "faq_item_tXFGQE": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the exact water ratio needed?",
+            "answer": "Use approximately 1:1 ratio (1 cup water for 1 cup flour). Since Pavan Puttu Podi is steam pre-conditioned, it absorbs water smoothly. Add water gradually while mixing to get perfect crumbs."
+          }
+        },
+        "faq_item_wDQm9W": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should Pavan Puttu Podi be stored after opening?",
+            "answer": "Once opened, transfer the flour into a clean, dry, airtight container and store in a cool, dry place. Avoid using damp spoons to preserve natural freshness."
+          }
+        },
+        "faq_item_FbPWm7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the shelf life of this package?",
+            "answer": "Pavan Steamed Puttu Podi has a shelf life of 6 Months from the date of manufacturing, thanks to our moisture-controlled sealed packaging."
+          }
+        },
+        "faq_item_NGyGWB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What ingredients are used in Pavan Puttu Podi?",
+            "answer": "Our puttu podi is made from 100% pure selected raw rice grains sourced from Kerala farms. No additives, no wheat blending, and no maida."
+          }
+        },
+        "faq_item_kQBPdR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are there any artificial preservatives or colors?",
+            "answer": "No. Pavan Puttu Podi contains zero chemical preservatives, zero added colors, and zero artificial flavorings. It is 100% natural and safe for your entire family."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_94mxRD",
+        "faq_item_tXFGQE",
+        "faq_item_wDQm9W",
+        "faq_item_FbPWm7",
+        "faq_item_NGyGWB",
+        "faq_item_kQBPdR"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "subheading": "GOT QUESTIONS?",
+        "heading": "Frequently Asked Questions",
+        "description": "Common queries about preparation, water ratios, storage, and natural ingredients."
+      }
+    },
+    "pavan_related_products_ykNXTY": {
+      "type": "pavan-related-products",
+      "name": "Related Products",
+      "settings": {
+        "subheading": "EXPLORE PAVAN KITCHEN",
+        "heading": "Frequently Bought Together",
+        "description": "Complete your authentic Kerala breakfast pantry with these customer favorites."
+      }
+    },
+    "pavan_sticky_mobile_cta_UE8APr": {
+      "type": "pavan-sticky-mobile-cta",
+      "name": "Sticky Mobile CTA",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "main_pavan_product_DyHzYd",
+    "pavan_why_choose_kLjxyx",
+    "pavan_cooking_instructions_nGRykp",
+    "pavan_serving_suggestions_aRfbFF",
+    "pavan_product_details_bKWfXy",
+    "pavan_comparison_etKJKp",
+    "pavan_certifications_KJDWNe",
+    "pavan_faq_Uzdjx4",
+    "pavan_related_products_ykNXTY",
+    "pavan_sticky_mobile_cta_UE8APr"
   ]
 }

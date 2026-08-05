@@ -1,0 +1,25 @@
+{% doc %}
+  Renders a product card snippet for related products and cross-sell grids.
+
+  @param {string} [card_image] - Optional custom image URL
+  @param {string} [card_title] - Title of the product
+  @param {string} [card_weight] - Weight / variant tag
+  @param {string} [card_price] - Display price string
+{% enddoc %}
+
+<div class="pavan-product-card" style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; text-align: center; box-shadow: var(--shadow-subtle); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+  <div style="background: var(--accent-cream); border-radius: var(--radius-md); padding: 20px; margin-bottom: 16px; min-height: 180px; display: flex; align-items: center; justify-content: center;">
+    {% if card_image != blank %}
+      <img src="{{ card_image }}" alt="{{ card_title | escape }}" width="140" height="140" style="max-height: 140px; width: auto; object-fit: contain;">
+    {% else %}
+      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ card_title | default: 'Pavan Product' | escape }}" width="140" height="140" style="max-height: 140px; width: auto; object-fit: contain;">
+    {% endif %}
+  </div>
+  <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 700; margin: 0 0 4px; color: var(--text-main);">{{ card_title | default: 'Pavan Product' | escape }}</h3>
+  <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 12px;">{{ card_weight | default: '1 Kg Pack' | escape }}</p>
+  <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 14px;">{{ card_price | default: '₹89.00' | escape }}</div>
+  <button type="button" class="btn-add-cart" style="height: 42px; font-size: 14px; width: 100%;">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+    Add To Cart
+  </button>
+</div>

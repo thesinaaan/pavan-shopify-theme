@@ -1,0 +1,58 @@
+{% comment %}
+  Section 5: Serving Suggestions
+  Luxury food pairing showcase featuring traditional Kerala breakfast accompaniments
+{% endcomment %}
+
+<div class="page-width sec-padding">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="eyebrow">{{ section.settings.subheading | escape }}</span>
+    <h2 class="sec-title">{{ section.settings.heading | escape }}</h2>
+    <p class="sec-desc">{{ section.settings.description | escape }}</p>
+  </div>
+
+  <div class="pavan-grid-5">
+    {% for block in section.blocks %}
+      <div class="serving-card" {{ block.shopify_attributes }} style="background: var(--accent-cream); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px 14px; text-align: center; box-shadow: var(--shadow-subtle);">
+        <div style="font-size: 32px; background: white; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+          {{ block.settings.icon }}
+        </div>
+        <h3 style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0 0 4px;">{{ block.settings.title | escape }}</h3>
+        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin: 0;">{{ block.settings.description | escape }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Serving Suggestions",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "AUTHENTIC PAIRINGS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Traditional Kerala Serving Ideas" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Elevate your morning table with these timeless Kerala pairings." }
+  ],
+  "blocks": [
+    {
+      "type": "pairing",
+      "name": "Pairing Card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji / Icon", "default": "🍛" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Kadala Curry" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Spiced black chickpea gravy with toasted coconut." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Serving Suggestions",
+      "blocks": [
+        { "type": "pairing", "settings": { "icon": "🍛", "title": "Kadala Curry", "description": "Classic roasted coconut black chickpea curry." } },
+        { "type": "pairing", "settings": { "icon": "🍌", "title": "Steamed Nendran", "description": "Sweet ripe Kerala plantain & fine sugar." } },
+        { "type": "pairing", "settings": { "icon": "🧈", "title": "Pure Cow Ghee", "description": "Golden melted ghee drizzled over hot puttu." } },
+        { "type": "pairing", "settings": { "icon": "🥥", "title": "Fresh Coconut", "description": "Juicy freshly grated coconut layers." } },
+        { "type": "pairing", "settings": { "icon": "🍳", "title": "Kerala Egg Roast", "description": "Rich caramelized onion & egg gravy." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

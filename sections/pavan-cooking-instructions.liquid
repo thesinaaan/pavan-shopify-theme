@@ -1,0 +1,101 @@
+{% comment %}
+  Section 4: Cooking Instructions Section
+  Utilizes the real back packaging asset showing the authentic printed cooking methods
+{% endcomment %}
+
+<div class="page-width sec-padding" id="PavanCookingSection">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="eyebrow">{{ section.settings.subheading | escape }}</span>
+    <h2 class="sec-title">{{ section.settings.heading | escape }}</h2>
+    <p class="sec-desc">{{ section.settings.description | escape }}</p>
+
+    <!-- Language Selector Tabs -->
+    <div style="display: inline-flex; background: var(--accent-cream); padding: 4px; border-radius: var(--radius-md); gap: 4px; margin-top: 16px; border: 1px solid var(--border-subtle);">
+      <button type="button" id="TabBtnEN" onclick="toggleCookingLang('en')" style="padding: 8px 20px; border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 13px; cursor: pointer; background: var(--primary); color: white;">English Method</button>
+      <button type="button" id="TabBtnML" onclick="toggleCookingLang('ml')" style="padding: 8px 20px; border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 13px; cursor: pointer; background: transparent; color: var(--text-main);">മലയാളം രീതി</button>
+    </div>
+  </div>
+
+  <div class="pavan-grid-2">
+    <!-- Visual Cooking Guide Banner -->
+    <div class="real-banner-box">
+      <img 
+        src="{{ 'pavan-cooking-guide-5min.png' | asset_url }}" 
+        alt="Pavan Steamed Puttu Podi - 5 Minute Step-by-Step Cooking Guide" 
+        width="800"
+        height="533"
+        loading="lazy"
+        onclick="openPavanLightbox('{{ 'pavan-cooking-guide-5min.png' | asset_url }}', 'Pavan Steamed Puttu Podi - 5 Minute Cooking Guide')"
+        style="width: 100%; height: auto; border-radius: var(--radius-md);">
+      <p style="font-size: 13px; color: var(--text-light); margin-top: 10px; margin-bottom: 0;">Tap image to enlarge 5-minute visual recipe guide.</p>
+    </div>
+
+    <!-- English Recipe Steps -->
+    <div id="RecipeStepsEN" style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; gap: 16px; align-items: flex-start;">
+        <div style="background: var(--primary-light); color: var(--primary); font-weight: 800; font-size: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0 0 4px;">Water & Salt Preparation</h4>
+          <p style="font-size: 14px; color: var(--text-muted); margin: 0;">Add 1 glass of lukewarm water & salt to 1 glass of Pavan Steamed Puttu Podi.</p>
+        </div>
+      </div>
+
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; gap: 16px; align-items: flex-start;">
+        <div style="background: var(--primary-light); color: var(--primary); font-weight: 800; font-size: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0 0 4px;">Crumbly Fingertip Blend</h4>
+          <p style="font-size: 14px; color: var(--text-muted); margin: 0;">Mix well with fingertips and keep aside for 20 minutes to absorb moisture evenly.</p>
+        </div>
+      </div>
+
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; gap: 16px; align-items: flex-start;">
+        <div style="background: var(--primary-light); color: var(--primary); font-weight: 800; font-size: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0 0 4px;">Layer & Steam</h4>
+          <p style="font-size: 14px; color: var(--text-muted); margin: 0;">Layer alternatively with fresh grated coconut into puttu maker and steam for 5–7 minutes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Malayalam Recipe Steps -->
+    <div id="RecipeStepsML" style="display: none; flex-direction: column; gap: 16px;">
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; gap: 16px; align-items: flex-start;">
+        <div style="background: var(--secondary-light); color: var(--secondary); font-weight: 800; font-size: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0 0 4px;">ഘട്ടം 1</h4>
+          <p style="font-size: 14px; color: var(--text-muted); margin: 0;">ഒരു ഗ്ലാസ് പവൻ പുട്ടുപൊടിയിലേക്ക് ഒരു ഗ്ലാസ് ചെറുചൂടുവെള്ളവും ഉപ്പും ചേർത്ത് നന്നായി ഇളക്കുക.</p>
+        </div>
+      </div>
+
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; gap: 16px; align-items: flex-start;">
+        <div style="background: var(--secondary-light); color: var(--secondary); font-weight: 800; font-size: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0 0 4px;">ഘട്ടം 2</h4>
+          <p style="font-size: 14px; color: var(--text-muted); margin: 0;">20 മിനിറ്റ് മാറ്റിവെക്കുക (മാവ് വെള്ളം നന്നായി വലിച്ചെടുക്കാൻ).</p>
+        </div>
+      </div>
+
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; gap: 16px; align-items: flex-start;">
+        <div style="background: var(--secondary-light); color: var(--secondary); font-weight: 800; font-size: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0 0 4px;">ഘട്ടം 3</h4>
+          <p style="font-size: 14px; color: var(--text-muted); margin: 0;">തേങ്ങ ചേർത്ത് പുട്ടുകുറ്റിയിൽ നിറച്ച് 5-7 മിനിറ്റ് ആവിയിൽ വേവിച്ചെടുക്കുക.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cooking Instructions",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "AUTHENTIC RECIPE METHOD" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How to Steam Perfect Pavan Puttu" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Simple step-by-step directions directly from our product package." }
+  ],
+  "presets": [
+    { "name": "Cooking Instructions" }
+  ]
+}
+{% endschema %}

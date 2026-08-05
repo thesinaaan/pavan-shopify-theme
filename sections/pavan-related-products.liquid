@@ -1,0 +1,32 @@
+{% comment %}
+  Section 11: Native Shopify Recommendations & Related Products Grid
+{% endcomment %}
+
+<div class="page-width sec-padding">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="eyebrow">{{ section.settings.subheading | escape }}</span>
+    <h2 class="sec-title">{{ section.settings.heading | escape }}</h2>
+    <p class="sec-desc">{{ section.settings.description | escape }}</p>
+  </div>
+
+  <div class="pavan-grid-4">
+    {% render 'pavan-product-card', card_title: "Pavan Premium Matta Rice", card_weight: "5 Kg Pack", card_price: "₹340.00" %}
+    {% render 'pavan-product-card', card_title: "Pavan Easy Idiyappam Podi", card_weight: "1 Kg Pack", card_price: "₹95.00" %}
+    {% render 'pavan-product-card', card_title: "Pavan Instant Palappam Mix", card_weight: "500 g Pack", card_price: "₹65.00" %}
+    {% render 'pavan-product-card', card_title: "Authentic Kerala Kadala Pack", card_weight: "1 Kg Pack", card_price: "₹120.00" %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "EXPLORE PAVAN KITCHEN" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Bought Together" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Complete your authentic Kerala breakfast pantry with these customer favorites." }
+  ],
+  "presets": [
+    { "name": "Related Products" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,248 @@
+{% comment %}
+  Section 1: Hero Product Section for Pavan Steamed Puttu Podi
+  Shopify Online Store 2.0 section with reorderable blocks & full schema customization
+{% endcomment %}
+
+<div class="page-width sec-padding" id="PavanHeroSection">
+  <div class="hero-grid">
+    <!-- Left Column: Product Gallery -->
+    <div class="hero-gallery-wrap">
+      <div class="hero-main-img-box">
+        {% if section.settings.show_badge and section.settings.badge_text != blank %}
+          <span class="badge-tag">{{ section.settings.badge_text | escape }}</span>
+        {% endif %}
+        {% if section.settings.cert_text != blank %}
+          <span style="position: absolute; top: 20px; right: 20px; background: white; color: var(--secondary); border: 1px solid rgba(27,67,50,0.3); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            {{ section.settings.cert_text | escape }}
+          </span>
+        {% endif %}
+
+        {% assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media %}
+        {% if featured_media != blank %}
+          <img 
+            id="MainProductImage"
+            src="{{ featured_media | image_url: width: 800 }}" 
+            alt="{{ featured_media.alt | default: product.title | escape }}" 
+            width="800" 
+            height="800" 
+            loading="eager"
+            onclick="openPavanLightbox(this.src, '{{ product.title | escape }}')"
+            style="cursor: zoom-in;">
+        {% else %}
+          <img 
+            id="MainProductImage"
+            src="{{ 'puttu-pack-front.jpg' | asset_url }}" 
+            alt="Pavan Steamed Puttu Podi Package Front" 
+            width="800" 
+            height="800" 
+            loading="eager"
+            onclick="openPavanLightbox('{{ 'puttu-pack-front.jpg' | asset_url }}', 'Pavan Steamed Puttu Podi Package Front')"
+            style="cursor: zoom-in;">
+        {% endif %}
+      </div>
+
+      <!-- Gallery Thumbnails -->
+      <div class="product-thumbnails" style="display: flex; gap: 12px; margin-top: 16px; justify-content: center;">
+        <button type="button" class="thumb-btn active" onclick="document.getElementById('MainProductImage').src='{{ 'puttu-pack-front.jpg' | asset_url }}'; this.parentElement.querySelectorAll('button').forEach(b => b.style.borderColor='var(--border-color)'); this.style.borderColor='var(--primary)';" style="border: 2px solid var(--primary); border-radius: var(--radius-sm); overflow: hidden; background: white; cursor: pointer; padding: 2px; width: 74px; height: 74px;" aria-label="Front Thumbnail">
+          <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="Front Pack Thumbnail" width="70" height="70" style="object-fit: contain; display: block;">
+        </button>
+        <button type="button" class="thumb-btn" onclick="document.getElementById('MainProductImage').src='{{ 'puttu-pack-back.jpg' | asset_url }}'; this.parentElement.querySelectorAll('button').forEach(b => b.style.borderColor='var(--border-color)'); this.style.borderColor='var(--primary)';" style="border: 2px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: white; cursor: pointer; padding: 2px; width: 74px; height: 74px;" aria-label="Back Thumbnail">
+          <img src="{{ 'puttu-pack-back.jpg' | asset_url }}" alt="Back Pack Thumbnail" width="70" height="70" style="object-fit: contain; display: block;">
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: Product Info & Dynamic Blocks -->
+    <div class="hero-details-wrap">
+      {% render 'pavan-star-rating' %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'vendor' %}
+            <div class="product-block-item" {{ block.shopify_attributes }} style="margin-top: 8px;">
+              <span style="font-size: 11px; font-weight: 700; color: var(--secondary); letter-spacing: 1.5px; text-transform: uppercase;">{{ block.settings.text | default: "PAVAN AGRO FOODS • ALUVA, KERALA" | escape }}</span>
+            </div>
+
+          {% when 'title' %}
+            <div class="product-block-item" {{ block.shopify_attributes }}>
+              <h1 class="hero-title">
+                {% if block.settings.title_text != blank %}
+                  {{ block.settings.title_text | escape }}
+                {% else %}
+                  {{ product.title | default: "Pavan Steamed Puttu Podi" }}
+                {% endif %}
+              </h1>
+            </div>
+
+          {% when 'subtitle' %}
+            <div class="product-block-item" {{ block.shopify_attributes }}>
+              <p class="malayalam-subtitle">{{ block.settings.text | default: "പാകത്തിൽ സ്റ്റീം ചെയ്ത പ്രീമിയം പുട്ടുപൊടി" | escape }}</p>
+            </div>
+
+          {% when 'price' %}
+            <div class="product-block-item" {{ block.shopify_attributes }}>
+              <div class="price-card">
+                <span class="curr-price" id="ProductPrice">{{ product.selected_or_first_available_variant.price | default: 8900 | money }}</span>
+                <span class="mrp-price" id="MrpPrice">{{ block.settings.mrp_price | default: "₹99.00" | escape }}</span>
+                <span class="save-badge">SAVE 10%</span>
+              </div>
+            </div>
+
+          {% when 'variant_picker' %}
+            <div class="product-block-item" {{ block.shopify_attributes }}>
+              <label style="display: block; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; color: var(--text-main);">Select Pack Size:</label>
+              <div class="variant-selector-grid">
+                <div class="v-card-box selected" onclick="selectProductVariant(this, '₹89.00', '₹99.00');">
+                  <strong>{{ block.settings.v1 | default: "1 Kg Pack" | escape }}</strong><br>
+                  <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹89.00</span>
+                </div>
+                <div class="v-card-box" onclick="selectProductVariant(this, '₹170.00', '₹190.00');">
+                  <strong>{{ block.settings.v2 | default: "2 Kg Pack" | escape }}</strong><br>
+                  <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹170.00</span>
+                </div>
+                <div class="v-card-box" onclick="selectProductVariant(this, '₹410.00', '₹450.00');">
+                  <strong>{{ block.settings.v3 | default: "5 Kg Family" | escape }}</strong><br>
+                  <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹410.00</span>
+                </div>
+              </div>
+            </div>
+
+          {% when 'quantity' %}
+            <div class="product-block-item" {{ block.shopify_attributes }} style="margin: 16px 0;">
+              <label style="display: block; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; color: var(--text-main);">Quantity:</label>
+              <div style="display: flex; align-items: center; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); width: fit-content; background: white; overflow: hidden;">
+                <button type="button" onclick="var q=document.getElementById('HeroQty'); if(parseInt(q.value)>1) q.value=parseInt(q.value)-1;" style="border: none; background: #f4f4f5; width: 40px; height: 40px; font-size: 18px; font-weight: bold; cursor: pointer;">-</button>
+                <input type="number" id="HeroQty" value="1" min="1" readonly style="width: 50px; height: 40px; border: none; text-align: center; font-weight: 700; font-size: 15px;">
+                <button type="button" onclick="var q=document.getElementById('HeroQty'); q.value=parseInt(q.value)+1;" style="border: none; background: #f4f4f5; width: 40px; height: 40px; font-size: 18px; font-weight: bold; cursor: pointer;">+</button>
+              </div>
+            </div>
+
+          {% when 'buy_buttons' %}
+            <div class="product-block-item" {{ block.shopify_attributes }}>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button type="button" class="btn-add-cart" id="HeroAddToCartBtn">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                  {{ block.settings.button_label | default: "ADD TO CART" | escape }}
+                </button>
+                <button type="button" style="width: 100%; height: 50px; background: var(--secondary); color: white; font-weight: 700; font-size: 15px; border: none; border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s;">
+                  BUY IT NOW
+                </button>
+              </div>
+            </div>
+
+          {% when 'delivery' %}
+            <div class="product-block-item" {{ block.shopify_attributes }} style="margin-top: 16px;">
+              <p style="font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; margin: 0; background: var(--accent-cream); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span>{{ block.settings.text | default: "Estimated Delivery: 2-4 Days | Ships Fresh from Aluva, Kerala" | escape }}</span>
+              </p>
+            </div>
+
+          {% when 'trust_row' %}
+            <div class="product-block-item" {{ block.shopify_attributes }}>
+              {% render 'pavan-trust-badges' %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pavan Main Product Hero",
+  "settings": [
+    { "type": "checkbox", "id": "show_badge", "label": "Show Badge Tag", "default": true },
+    { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "BESTSELLER" },
+    { "type": "text", "id": "cert_text", "label": "Certification Text", "default": "FSSAI REGISTERED" }
+  ],
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Vendor Subtitle",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "PAVAN AGRO FOODS • ALUVA, KERALA" }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title_text", "label": "Title Override" }
+      ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Malayalam Subtitle",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Subtitle", "default": "പാകത്തിൽ സ്റ്റീം ചെയ്ത പ്രീമിയം പുട്ടുപൊടി" }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "mrp_price", "label": "MRP Price", "default": "₹99.00" }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant Picker",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "v1", "label": "Variant 1", "default": "1 Kg Pack" },
+        { "type": "text", "id": "v2", "label": "Variant 2", "default": "2 Kg Pack" },
+        { "type": "text", "id": "v3", "label": "Variant 3", "default": "5 Kg Family" }
+      ]
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity Selector",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy Buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "button_label", "label": "Button Label", "default": "ADD TO CART" }
+      ]
+    },
+    {
+      "type": "delivery",
+      "name": "Delivery Info",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Delivery Microcopy", "default": "Estimated Delivery: 2-4 Days | Ships Fresh from Aluva, Kerala" }
+      ]
+    },
+    {
+      "type": "trust_row",
+      "name": "Trust Badges Row",
+      "limit": 1,
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pavan Main Product Hero",
+      "blocks": [
+        { "type": "vendor" },
+        { "type": "title" },
+        { "type": "subtitle" },
+        { "type": "price" },
+        { "type": "variant_picker" },
+        { "type": "quantity" },
+        { "type": "buy_buttons" },
+        { "type": "delivery" },
+        { "type": "trust_row" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,92 @@
+{% comment %}
+  Section 6: Product Details & Specifications
+  Features real front & back pack image toggles + complete back-of-pack specs
+{% endcomment %}
+
+<div class="sec-cream sec-padding" id="PavanProductDetailsSection">
+  <div class="page-width">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="eyebrow">{{ section.settings.subheading | escape }}</span>
+      <h2 class="sec-title">{{ section.settings.heading | escape }}</h2>
+      <p class="sec-desc">{{ section.settings.description | escape }}</p>
+    </div>
+
+    <div class="pavan-grid-2" style="align-items: start;">
+      <!-- Real Package Image Toggle Card -->
+      <div style="background: white; border-radius: var(--radius-lg); padding: 24px 16px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-subtle); text-align: center;">
+        <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+          <button type="button" id="PackBtnFront" onclick="togglePackageView('front')" style="padding: 8px 18px; border: 1.5px solid var(--primary); border-radius: var(--radius-sm); font-weight: 700; font-size: 12px; cursor: pointer; background: var(--primary-light); color: var(--primary-dark);">Front Packaging</button>
+          <button type="button" id="PackBtnBack" onclick="togglePackageView('back')" style="padding: 8px 18px; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); font-weight: 700; font-size: 12px; cursor: pointer; background: white; color: var(--text-muted);">Back Packaging & Specs</button>
+        </div>
+
+        <div style="min-height: 320px; display: flex; align-items: center; justify-content: center; background: var(--accent-cream); border-radius: var(--radius-md); padding: 16px;">
+          <img 
+            id="PackViewImg" 
+            src="{{ 'puttu-pack-front.jpg' | asset_url }}" 
+            alt="Pavan Packaging View" 
+            width="500"
+            height="500"
+            onclick="openPavanLightbox(this.src, 'Pavan Steamed Puttu Podi Package View')"
+            style="max-height: 320px; width: auto; max-width: 100%; object-fit: contain; cursor: zoom-in;">
+        </div>
+      </div>
+
+      <!-- Verified Back-of-Pack Accordions -->
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <details class="pavan-acc-card" open style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-subtle);">
+          <summary style="padding: 16px 20px; font-family: var(--font-heading); font-size: 16px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-main);">
+            <span>🌾 Ingredients & Quality</span>
+            <span class="acc-icon" style="font-size: 20px; color: var(--primary); font-weight: bold;">+</span>
+          </summary>
+          <div style="padding: 0 20px 18px; font-size: 14px; color: var(--text-muted); line-height: 1.6; border-top: 1px solid #f4f4f5; margin-top: 8px; padding-top: 12px;">
+            <p style="margin: 0;"><strong>Ingredients:</strong> RAW RICE / INGRÉDIENTS: RIZ CRU / ZUTATEN: ROHER REIS / المكونات: أرز خام (100% Selected Kerala Grains).</p>
+            <p style="margin: 6px 0 0;">Zero preservatives, zero synthetic colors, zero added flavors.</p>
+          </div>
+        </details>
+
+        <details class="pavan-acc-card" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-subtle);">
+          <summary style="padding: 16px 20px; font-family: var(--font-heading); font-size: 16px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-main);">
+            <span>📊 Nutrition Facts (Per 100g)</span>
+            <span class="acc-icon" style="font-size: 20px; color: var(--primary); font-weight: bold;">+</span>
+          </summary>
+          <div style="padding: 0 20px 18px; font-size: 14px; color: var(--text-muted); line-height: 1.6; border-top: 1px solid #f4f4f5; margin-top: 8px; padding-top: 12px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <tr style="border-bottom: 1px solid #e4e4e7;"><td style="padding: 6px 0; font-weight: 600;">Energy / Calories</td><td style="padding: 6px 0; text-align: right;">330 kcal</td></tr>
+              <tr style="border-bottom: 1px solid #e4e4e7;"><td style="padding: 6px 0; font-weight: 600;">Total Carbohydrate</td><td style="padding: 6px 0; text-align: right;">76 g</td></tr>
+              <tr style="border-bottom: 1px solid #e4e4e7;"><td style="padding: 6px 0; font-weight: 600;">Protein</td><td style="padding: 6px 0; text-align: right;">4 g</td></tr>
+              <tr style="border-bottom: 1px solid #e4e4e7;"><td style="padding: 6px 0; font-weight: 600;">Total Fat</td><td style="padding: 6px 0; text-align: right;">2 g</td></tr>
+              <tr style="border-bottom: 1px solid #e4e4e7;"><td style="padding: 6px 0; font-weight: 600;">Dietary Fiber</td><td style="padding: 6px 0; text-align: right;">2 g</td></tr>
+              <tr><td style="padding: 6px 0; font-weight: 600;">Potassium</td><td style="padding: 6px 0; text-align: right;">80 mg</td></tr>
+            </table>
+          </div>
+        </details>
+
+        <details class="pavan-acc-card" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-subtle);">
+          <summary style="padding: 16px 20px; font-family: var(--font-heading); font-size: 16px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-main);">
+            <span>🏭 Manufacturer & License Info</span>
+            <span class="acc-icon" style="font-size: 20px; color: var(--primary); font-weight: bold;">+</span>
+          </summary>
+          <div style="padding: 0 20px 18px; font-size: 14px; color: var(--text-muted); line-height: 1.6; border-top: 1px solid #f4f4f5; margin-top: 8px; padding-top: 12px;">
+            <p style="margin: 0;"><strong>Manufactured & Marketed By:</strong> PAVAN AGRO FOODS, Aluva-12, Ernakulam Dt., Kerala, India - 683112.</p>
+            <p style="margin: 6px 0 0;"><strong>FSSAI License No:</strong> 11324007000760</p>
+            <p style="margin: 6px 0 0;"><strong>Customer Care Contact:</strong> +91 94464 86600 | info@pavangroups.in</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Details",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "FULL TRANSPARENCY" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Product Specifications & Package Details" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Inspect exact ingredients, nutritional profile, and manufacturer licenses." }
+  ],
+  "presets": [
+    { "name": "Product Details" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+{% comment %}
+  Section 10: Frequently Asked Questions
+  Accessible accordion layout with schema structured data support
+{% endcomment %}
+
+<div class="sec-cream sec-padding" id="PavanFaqSection">
+  <div class="page-width">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="eyebrow">{{ section.settings.subheading | escape }}</span>
+      <h2 class="sec-title">{{ section.settings.heading | escape }}</h2>
+      <p class="sec-desc">{{ section.settings.description | escape }}</p>
+    </div>
+
+    <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
+      {% for block in section.blocks %}
+        <details class="faq-accordion-card" {{ block.shopify_attributes }} style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-subtle);">
+          <summary style="padding: 16px 20px; font-family: var(--font-heading); font-size: 16px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-main);">
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="acc-icon" style="font-size: 18px; color: var(--primary); font-weight: bold;">+</span>
+          </summary>
+          <div style="padding: 0 20px 16px; font-size: 14px; color: var(--text-muted); line-height: 1.6; border-top: 1px solid #f4f4f5; margin-top: 6px; padding-top: 12px;">
+            {{ block.settings.answer | escape }}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "GOT QUESTIONS?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Common queries about preparation, water ratios, storage, and natural ingredients." }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How do I cook Pavan Steamed Puttu Podi?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Mix 1 glass of Pavan Puttu Podi with 1 glass of lukewarm water and salt. Mix gently until crumbly, rest for 15-20 minutes, then layer with fresh grated coconut into a puttu kutti and steam for 5-7 minutes." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I cook Pavan Steamed Puttu Podi?",
+            "answer": "Mix 1 glass of Pavan Puttu Podi with 1 glass of lukewarm water and salt. Mix gently with your fingertips until crumbly and moist, rest for 15-20 minutes, then layer with fresh grated coconut into a puttu kutti and steam for 5-7 minutes."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the exact water ratio needed?",
+            "answer": "Use approximately 1:1 ratio (1 cup water for 1 cup flour). Since Pavan Puttu Podi is steam pre-conditioned, it absorbs water smoothly. Add water gradually while mixing to get perfect crumbs."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should Pavan Puttu Podi be stored after opening?",
+            "answer": "Once opened, transfer the flour into a clean, dry, airtight container and store in a cool, dry place. Avoid using damp spoons to preserve natural freshness."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the shelf life of this package?",
+            "answer": "Pavan Steamed Puttu Podi has a shelf life of 6 Months from the date of manufacturing, thanks to our moisture-controlled sealed packaging."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What ingredients are used in Pavan Puttu Podi?",
+            "answer": "Our puttu podi is made from 100% pure selected raw rice grains sourced from Kerala farms. No additives, no wheat blending, and no maida."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are there any artificial preservatives or colors?",
+            "answer": "No. Pavan Puttu Podi contains zero chemical preservatives, zero added colors, and zero artificial flavorings. It is 100% natural and safe for your entire family."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
