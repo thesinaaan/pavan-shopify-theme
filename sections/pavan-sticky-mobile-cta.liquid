@@ -6,20 +6,20 @@
 <div id="PavanStickyBar" class="pavan-sticky-bar">
   <div class="pavan-sticky-container">
     <div class="pavan-sticky-product-info">
-      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="48" height="48" class="pavan-sticky-thumb">
-      <div>
-        <div class="pavan-sticky-title">{{ product.title | default: "Pavan Steamed Puttu Podi" | escape }} (1 Kg)</div>
+      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="44" height="44" class="pavan-sticky-thumb">
+      <div class="pavan-sticky-text-wrap">
+        <div class="pavan-sticky-title">{{ product.title | default: "Pavan Steamed Puttu Podi" | escape }}</div>
         <div class="pavan-sticky-meta">
           <span class="pavan-sticky-stars">★★★★★</span>
-          <span class="pavan-sticky-price" id="StickyBarPrice">{{ product.selected_or_first_available_variant.price | default: 8900 | money }}</span>
+          <span class="pavan-sticky-price" id="StickyBarPrice">Rs. 89.00</span>
           <span class="pavan-sticky-mrp">₹99.00</span>
         </div>
       </div>
     </div>
     
     <div class="pavan-sticky-action">
-      <button type="button" class="pavan-sticky-btn">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+      <button type="button" class="pavan-sticky-btn" onclick="pavanAddToCart('{{ product.title | escape }}');">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
         <span>ADD TO CART</span>
       </button>
     </div>
@@ -34,98 +34,124 @@
     right: 0;
     z-index: 9999;
     background: #ffffff;
-    border-top: 2px solid #1b4332;
-    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+    border-top: 1px solid var(--border-color, #e5e7eb);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
     padding: 10px 16px;
     transform: translateY(110%);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s ease;
   }
-  .pavan-sticky-bar.is-visible {
-    transform: translateY(0);
+  .pavan-sticky-bar.is-visible, .pavan-sticky-bar.visible {
+    transform: translateY(0) !important;
   }
   .pavan-sticky-container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
   }
   .pavan-sticky-product-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
   }
   .pavan-sticky-thumb {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
     border-radius: 8px;
     background: #fff9f0;
-    padding: 3px;
+    padding: 2px;
     border: 1px solid #e5e7eb;
+    flex-shrink: 0;
+  }
+  .pavan-sticky-text-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    overflow: hidden;
   }
   .pavan-sticky-title {
     font-weight: 700;
     font-size: 14px;
-    color: #1f2937;
+    color: #18181b;
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .pavan-sticky-meta {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     margin-top: 2px;
+    white-space: nowrap;
   }
   .pavan-sticky-stars {
     color: #f59e0b;
-    font-size: 12px;
+    font-size: 11px;
+    flex-shrink: 0;
   }
   .pavan-sticky-price {
     font-weight: 800;
-    font-size: 16px;
-    color: #1b4332;
+    font-size: 15px;
+    color: #d96b27;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .pavan-sticky-mrp {
     font-size: 12px;
     color: #9ca3af;
     text-decoration: line-through;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .pavan-sticky-action {
+    flex-shrink: 0;
   }
   .pavan-sticky-btn {
-    background: #1b4332;
+    background: #d96b27;
     color: #ffffff;
     border: none;
     border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.5px;
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(27, 67, 50, 0.25);
-    transition: all 0.2s ease;
+    height: 42px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(217, 107, 39, 0.3);
+    transition: background 0.2s ease, transform 0.1s ease;
   }
   .pavan-sticky-btn:hover {
-    background: #2d6a4f;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(27, 67, 50, 0.35);
+    background: #b85418;
+    transform: translateY(-1px);
   }
-  @media (max-width: 640px) {
+
+  @media (max-width: 600px) {
     .pavan-sticky-bar {
       padding: 8px 12px;
     }
     .pavan-sticky-title {
-      font-size: 12px;
-      max-width: 130px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 13px;
+    }
+    .pavan-sticky-price {
+      font-size: 13px;
     }
     .pavan-sticky-btn {
-      padding: 10px 16px;
-      font-size: 13px;
+      padding: 8px 14px;
+      font-size: 12px;
+      height: 38px;
     }
   }
 </style>
@@ -137,7 +163,7 @@
 
     window.addEventListener('scroll', function() {
       var scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      if (scrollPosition > 450) {
+      if (scrollPosition > 350) {
         stickyBar.classList.add('is-visible');
       } else {
         stickyBar.classList.remove('is-visible');

@@ -10,15 +10,15 @@
     <script src="{{ 'pavan-product.js' | asset_url }}" defer="defer"></script>
   </head>
   <body>
-    <header class="site-header" style="background: white; border-bottom: 1px solid #ececec; padding: 12px 20px;">
-      <div class="page-width" style="display: flex; align-items: center; justify-content: space-between; max-width: 1240px; margin: 0 auto;">
-        <a href="{{ routes.root_url }}" class="logo-link">
-          <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="160" height="42" style="height: 42px; width: auto;">
+    <header class="site-header" style="background: white; border-bottom: 1px solid #ececec; padding: 14px 24px; width: 100%;">
+      <div class="site-header-container" style="max-width: 1240px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <a href="{{ routes.root_url }}" class="logo-link" style="display: flex; align-items: center;">
+          <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="140" height="40" style="height: 40px; width: auto; object-fit: contain;">
         </a>
-        <div class="header-actions">
-          <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Shopping Cart" style="position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: #1F2A24;">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-            <span class="cart-badge" style="position: absolute; top: 2px; right: 2px; background: #D96B27; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;">{{ cart.item_count | default: 0 }}</span>
+        <div class="header-actions" style="display: flex; align-items: center;">
+          <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Shopping Cart" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #18181b; text-decoration: none;">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <span class="cart-badge" style="position: absolute; top: 0px; right: 0px; background: #D96B27; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(217,107,39,0.4);">{{ cart.item_count | default: 0 }}</span>
           </a>
         </div>
       </div>
