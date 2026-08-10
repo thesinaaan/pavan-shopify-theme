@@ -296,6 +296,11 @@ body {
   background: var(--primary-light);
 }
 
+.v-card-box.disabled-variant {
+  opacity: 0.55;
+  background: #f4f4f5;
+}
+
 .btn-add-cart {
   width: 100%;
   height: 54px;

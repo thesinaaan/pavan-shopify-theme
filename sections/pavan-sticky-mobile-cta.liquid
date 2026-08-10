@@ -3,24 +3,27 @@
   Appears at bottom of screen on both Desktop & Mobile when user scrolls down
 {% endcomment %}
 
+{% assign pavan_prod = all_products['pavan-steamed-puttu-podi'] | default: product %}
+{% assign current_variant = pavan_prod.selected_or_first_available_variant | default: pavan_prod.variants.first %}
+
 <div id="PavanStickyBar" class="pavan-sticky-bar">
   <div class="pavan-sticky-container">
     <div class="pavan-sticky-product-info">
-      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="44" height="44" class="pavan-sticky-thumb">
+      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ pavan_prod.title | default: 'Pavan Steamed Puttu Podi' | escape }}" width="44" height="44" class="pavan-sticky-thumb">
       <div class="pavan-sticky-text-wrap">
-        <div class="pavan-sticky-title">{{ product.title | default: "Pavan Steamed Puttu Podi" | escape }}</div>
+        <div class="pavan-sticky-title">{{ pavan_prod.title | default: "Pavan Steamed Puttu Podi" | escape }}</div>
         <div class="pavan-sticky-meta">
           <span class="pavan-sticky-stars">★★★★★</span>
-          <span class="pavan-sticky-price" id="StickyBarPrice">Rs. 89.00</span>
+          <span class="pavan-sticky-price" id="StickyBarPrice">{{ current_variant.price | default: 8900 | money }}</span>
           <span class="pavan-sticky-mrp">₹99.00</span>
         </div>
       </div>
     </div>
     
     <div class="pavan-sticky-action">
-      <button type="button" class="pavan-sticky-btn" onclick="pavanAddToCart('{{ product.title | escape }}');">
+      <button type="button" class="pavan-sticky-btn" id="StickyAddToCartBtn" onclick="pavanAddToCart();">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-        <span>ADD TO CART</span>
+        <span id="StickyAddToCartBtnText">ADD TO CART</span>
       </button>
     </div>
   </div>

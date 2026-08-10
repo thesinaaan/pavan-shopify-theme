@@ -3,6 +3,9 @@
   Shopify Online Store 2.0 section with reorderable blocks & full schema customization
 {% endcomment %}
 
+{% assign pavan_prod = all_products['pavan-steamed-puttu-podi'] | default: product %}
+{% assign current_variant = pavan_prod.selected_or_first_available_variant | default: pavan_prod.variants.first %}
+
 <div class="page-width sec-padding" id="PavanHeroSection">
   <div class="hero-grid">
     <!-- Left Column: Product Gallery -->
@@ -22,16 +25,16 @@
           {% endif %}
         </div>
 
-        {% assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media %}
+        {% assign featured_media = current_variant.featured_media | default: pavan_prod.featured_media %}
         {% if featured_media != blank %}
           <img 
             id="MainProductImage"
             src="{{ featured_media | image_url: width: 800 }}" 
-            alt="{{ featured_media.alt | default: product.title | escape }}" 
+            alt="{{ featured_media.alt | default: pavan_prod.title | escape }}" 
             width="800" 
             height="800" 
             loading="eager"
-            onclick="openPavanLightbox(this.src, '{{ product.title | escape }}')"
+            onclick="openPavanLightbox(this.src, '{{ pavan_prod.title | escape }}')"
             style="cursor: zoom-in;">
         {% else %}
           <img 
@@ -73,7 +76,7 @@
                 {% if block.settings.title_text != blank %}
                   {{ block.settings.title_text | escape }}
                 {% else %}
-                  {{ product.title | default: "Pavan Steamed Puttu Podi" }}
+                  {{ pavan_prod.title | default: "Pavan Steamed Puttu Podi" }}
                 {% endif %}
               </h1>
             </div>
@@ -86,7 +89,7 @@
           {% when 'price' %}
             <div class="product-block-item" {{ block.shopify_attributes }}>
               <div class="price-card">
-                <span class="curr-price" id="ProductPrice">{{ product.selected_or_first_available_variant.price | default: 8900 | money }}</span>
+                <span class="curr-price" id="ProductPrice">{{ current_variant.price | default: 8900 | money }}</span>
                 <span class="mrp-price" id="MrpPrice">{{ block.settings.mrp_price | default: "₹99.00" | escape }}</span>
                 <span class="save-badge">SAVE 10%</span>
               </div>
@@ -95,20 +98,57 @@
           {% when 'variant_picker' %}
             <div class="product-block-item" {{ block.shopify_attributes }}>
               <label style="display: block; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; color: var(--text-main);">Select Pack Size:</label>
-              <div class="variant-selector-grid">
-                <div class="v-card-box selected" onclick="selectProductVariant(this, '₹89.00', '₹99.00');">
-                  <strong>{{ block.settings.v1 | default: "1 Kg Pack" | escape }}</strong><br>
-                  <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹89.00</span>
-                </div>
-                <div class="v-card-box" onclick="selectProductVariant(this, '₹170.00', '₹190.00');">
-                  <strong>{{ block.settings.v2 | default: "2 Kg Pack" | escape }}</strong><br>
-                  <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹170.00</span>
-                </div>
-                <div class="v-card-box" onclick="selectProductVariant(this, '₹410.00', '₹450.00');">
-                  <strong>{{ block.settings.v3 | default: "5 Kg Family" | escape }}</strong><br>
-                  <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹410.00</span>
-                </div>
+              <div class="variant-selector-grid" id="PavanVariantPicker">
+                {% if pavan_prod.variants.size > 1 and pavan_prod.has_only_default_variant == false %}
+                  {% for variant in pavan_prod.variants %}
+                    <div class="v-card-box {% if variant.id == current_variant.id %}selected{% endif %} {% unless variant.available %}disabled-variant{% endunless %}"
+                         data-variant-id="{{ variant.id }}"
+                         data-price="{{ variant.price | money }}"
+                         data-compare-at-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                         data-available="{% if variant.available %}true{% else %}false{% endif %}"
+                         onclick="selectProductVariant(this);">
+                      <strong>{{ variant.title | escape }}</strong><br>
+                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">{{ variant.price | money }}</span>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  {% assign v1_title = block.settings.v1 | default: "1 Kg Pack" %}
+                  {% assign v2_title = block.settings.v2 | default: "2 Kg Pack" %}
+                  {% assign v3_title = block.settings.v3 | default: "5 Kg Family" %}
+                  <div class="v-card-box selected"
+                       data-variant-id="{{ current_variant.id | default: 46029367541830 }}"
+                       data-price="{{ current_variant.price | default: 8900 | money }}"
+                       data-compare-at-price="₹99.00"
+                       data-available="true"
+                       onclick="selectProductVariant(this);">
+                    <strong>{{ v1_title | escape }}</strong><br>
+                    <span style="font-size: 13px; color: var(--primary); font-weight: 700;">{{ current_variant.price | default: 8900 | money }}</span>
+                  </div>
+                  {% if v2_title != blank %}
+                    <div class="v-card-box"
+                         data-variant-id="{{ current_variant.id | default: 46029367541830 }}"
+                         data-price="₹170.00"
+                         data-compare-at-price="₹190.00"
+                         data-available="true"
+                         onclick="selectProductVariant(this);">
+                      <strong>{{ v2_title | escape }}</strong><br>
+                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹170.00</span>
+                    </div>
+                  {% endif %}
+                  {% if v3_title != blank %}
+                    <div class="v-card-box"
+                         data-variant-id="{{ current_variant.id | default: 46029367541830 }}"
+                         data-price="₹410.00"
+                         data-compare-at-price="₹450.00"
+                         data-available="true"
+                         onclick="selectProductVariant(this);">
+                      <strong>{{ v3_title | escape }}</strong><br>
+                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹410.00</span>
+                    </div>
+                  {% endif %}
+                {% endif %}
               </div>
+              <input type="hidden" id="SelectedVariantId" name="id" value="{{ current_variant.id | default: 46029367541830 }}">
             </div>
 
           {% when 'quantity' %}
@@ -124,11 +164,11 @@
           {% when 'buy_buttons' %}
             <div class="product-block-item" {{ block.shopify_attributes }}>
               <div style="display: flex; flex-direction: column; gap: 12px;">
-                <button type="button" class="btn-add-cart" id="HeroAddToCartBtn">
+                <button type="button" class="btn-add-cart" id="HeroAddToCartBtn" onclick="pavanAddToCart();">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                  {{ block.settings.button_label | default: "ADD TO CART" | escape }}
+                  <span id="HeroAddToCartBtnText">{{ block.settings.button_label | default: "ADD TO CART" | escape }}</span>
                 </button>
-                <button type="button" style="width: 100%; height: 50px; background: var(--secondary); color: white; font-weight: 700; font-size: 15px; border: none; border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s;">
+                <button type="button" id="HeroBuyNowBtn" onclick="pavanAddToCart();" style="width: 100%; height: 50px; background: var(--secondary); color: white; font-weight: 700; font-size: 15px; border: none; border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s;">
                   BUY IT NOW
                 </button>
               </div>
