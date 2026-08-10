@@ -34,6 +34,7 @@
   --pavan-border: #e5e5e7;
 }
 
+html,
 body {
   font-family: var(--font-body);
   color: var(--text-main);
@@ -42,12 +43,40 @@ body {
   padding: 0;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid #ececec;
+  padding: 14px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.site-header-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .page-width {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sec-padding {
@@ -127,24 +156,47 @@ body {
 .hero-main-img-box {
   background: var(--accent-cream);
   border-radius: var(--radius-lg);
-  padding: 40px 24px;
+  padding: 56px 24px 32px;
   text-align: center;
   position: relative;
   border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-main-img-box img {
   max-height: 420px;
   width: auto;
   max-width: 100%;
+  margin: 0 auto;
+  display: block;
   object-fit: contain;
   transition: transform 0.4s ease;
 }
 
-.badge-tag {
+.hero-badges-header {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-badges-header > * {
+  pointer-events: auto;
+}
+
+.badge-tag {
   background: var(--primary);
   color: white;
   font-size: 11px;
@@ -153,6 +205,22 @@ body {
   padding: 6px 14px;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cert-tag {
+  background: white;
+  color: var(--secondary);
+  border: 1px solid rgba(27,67,50,0.3);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .hero-title {
@@ -357,14 +425,19 @@ details summary .acc-icon { transition: transform 0.25s ease; }
 }
 
 @media (max-width: 768px) {
+  .site-header { padding: 12px 16px; }
   .page-width { padding: 0 16px; }
   .sec-padding { padding: 40px 0; }
   .sec-title { font-size: 24px; letter-spacing: -0.3px; }
   .hero-title { font-size: 26px; }
   .malayalam-subtitle { font-size: 15px; margin-bottom: 14px; }
   
-  .hero-main-img-box { padding: 24px 16px; min-height: 260px; }
-  .hero-main-img-box img { max-height: 260px; }
+  .hero-main-img-box { padding: 48px 12px 20px; min-height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .hero-main-img-box img { max-height: 260px; margin: 0 auto; display: block; }
+  .hero-badges-header { top: 12px; left: 12px; right: 12px; gap: 6px; }
+  .badge-tag { font-size: 10px; padding: 4px 8px; }
+  .cert-tag { font-size: 10px; padding: 4px 8px; gap: 4px; }
+  .cert-tag svg { width: 12px; height: 12px; }
   
   .variant-selector-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .v-card-box { padding: 10px 4px; font-size: 12px; }
@@ -381,6 +454,9 @@ details summary .acc-icon { transition: transform 0.25s ease; }
 }
 
 @media (max-width: 480px) {
+  .hero-badges-header { top: 8px; left: 8px; right: 8px; gap: 4px; }
+  .badge-tag { font-size: 9px; padding: 3px 6px; }
+  .cert-tag { font-size: 9px; padding: 3px 6px; gap: 3px; }
   .variant-selector-grid { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
   .v-card-box { padding: 8px 4px; }
   .v-card-box strong { font-size: 11px; }

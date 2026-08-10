@@ -8,15 +8,19 @@
     <!-- Left Column: Product Gallery -->
     <div class="hero-gallery-wrap">
       <div class="hero-main-img-box">
-        {% if section.settings.show_badge and section.settings.badge_text != blank %}
-          <span class="badge-tag">{{ section.settings.badge_text | escape }}</span>
-        {% endif %}
-        {% if section.settings.cert_text != blank %}
-          <span style="position: absolute; top: 20px; right: 20px; background: white; color: var(--secondary); border: 1px solid rgba(27,67,50,0.3); font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 6px;">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            {{ section.settings.cert_text | escape }}
-          </span>
-        {% endif %}
+        <div class="hero-badges-header">
+          {% if section.settings.show_badge and section.settings.badge_text != blank %}
+            <span class="badge-tag">{{ section.settings.badge_text | escape }}</span>
+          {% else %}
+            <span></span>
+          {% endif %}
+          {% if section.settings.cert_text != blank %}
+            <span class="cert-tag">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              {{ section.settings.cert_text | escape }}
+            </span>
+          {% endif %}
+        </div>
 
         {% assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media %}
         {% if featured_media != blank %}

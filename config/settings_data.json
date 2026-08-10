@@ -1,12 +1,10 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
+
 {
-  "current": {}
+  "current": {
+    "max_page_width": "1200px",
+    "min_page_margin": 16,
+    "background_color": "#FFFFFF",
+    "foreground_color": "#18181b",
+    "input_corner_radius": 8
+  }
 }

@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>{{ page_title }} - {{ shop.name }}</title>
     {{ content_for_header }}
+    {% render 'css-variables' %}
+    {{ 'critical.css' | asset_url | stylesheet_tag }}
     {{ 'pavan-product.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'pavan-product.js' | asset_url }}" defer="defer"></script>
   </head>
   <body>
-    <header class="site-header" style="background: white; border-bottom: 1px solid #ececec; padding: 14px 24px; width: 100%;">
-      <div class="site-header-container" style="max-width: 1240px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+    <header class="site-header">
+      <div class="site-header-container">
         <a href="{{ routes.root_url }}" class="logo-link" style="display: flex; align-items: center;">
-          <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="140" height="40" style="height: 40px; width: auto; object-fit: contain;">
+          <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="140" height="40" style="height: 36px; width: auto; object-fit: contain;">
         </a>
         <div class="header-actions" style="display: flex; align-items: center;">
           <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Shopping Cart" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #18181b; text-decoration: none;">
