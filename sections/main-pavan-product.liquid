@@ -1,9 +1,9 @@
 {% comment %}
-  Section 1: Hero Product Section for Pavan Steamed Puttu Podi
-  Shopify Online Store 2.0 section with reorderable blocks & full schema customization
+  Main Product Section
+  Shopify Online Store 2.0 section for product display, variant selection, and Ajax add-to-cart.
 {% endcomment %}
 
-{% assign pavan_prod = all_products['pavan-steamed-puttu-podi'] | default: product %}
+{% assign pavan_prod = section.settings.product | default: product | default: collections.all.products.first %}
 {% assign current_variant = pavan_prod.selected_or_first_available_variant | default: pavan_prod.variants.first %}
 
 <div class="page-width sec-padding" id="PavanHeroSection">
@@ -37,27 +37,22 @@
             onclick="openPavanLightbox(this.src, '{{ pavan_prod.title | escape }}')"
             style="cursor: zoom-in;">
         {% else %}
-          <img 
-            id="MainProductImage"
-            src="{{ 'puttu-pack-front.jpg' | asset_url }}" 
-            alt="Pavan Steamed Puttu Podi Package Front" 
-            width="800" 
-            height="800" 
-            loading="eager"
-            onclick="openPavanLightbox('{{ 'puttu-pack-front.jpg' | asset_url }}', 'Pavan Steamed Puttu Podi Package Front')"
-            style="cursor: zoom-in;">
+          <div style="background: #f4f4f5; display: flex; align-items: center; justify-content: center; height: 350px; width: 100%; border-radius: var(--radius-md);">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
         {% endif %}
       </div>
 
       <!-- Gallery Thumbnails -->
-      <div class="product-thumbnails" style="display: flex; gap: 12px; margin-top: 16px; justify-content: center;">
-        <button type="button" class="thumb-btn active" onclick="document.getElementById('MainProductImage').src='{{ 'puttu-pack-front.jpg' | asset_url }}'; this.parentElement.querySelectorAll('button').forEach(b => b.style.borderColor='var(--border-color)'); this.style.borderColor='var(--primary)';" style="border: 2px solid var(--primary); border-radius: var(--radius-sm); overflow: hidden; background: white; cursor: pointer; padding: 2px; width: 74px; height: 74px;" aria-label="Front Thumbnail">
-          <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="Front Pack Thumbnail" width="70" height="70" style="object-fit: contain; display: block;">
-        </button>
-        <button type="button" class="thumb-btn" onclick="document.getElementById('MainProductImage').src='{{ 'puttu-pack-back.jpg' | asset_url }}'; this.parentElement.querySelectorAll('button').forEach(b => b.style.borderColor='var(--border-color)'); this.style.borderColor='var(--primary)';" style="border: 2px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: white; cursor: pointer; padding: 2px; width: 74px; height: 74px;" aria-label="Back Thumbnail">
-          <img src="{{ 'puttu-pack-back.jpg' | asset_url }}" alt="Back Pack Thumbnail" width="70" height="70" style="object-fit: contain; display: block;">
-        </button>
-      </div>
+      {% if pavan_prod.media.size > 1 %}
+        <div class="product-thumbnails" style="display: flex; gap: 12px; margin-top: 16px; justify-content: center;">
+          {% for media in pavan_prod.media %}
+            <button type="button" class="thumb-btn {% if forloop.first %}active{% endif %}" onclick="document.getElementById('MainProductImage').src='{{ media | image_url: width: 800 }}'; this.parentElement.querySelectorAll('button').forEach(b => b.style.borderColor='var(--border-color)'); this.style.borderColor='var(--primary)';" style="border: 2px solid {% if forloop.first %}var(--primary){% else %}var(--border-color){% endif %}; border-radius: var(--radius-sm); overflow: hidden; background: white; cursor: pointer; padding: 2px; width: 74px; height: 74px;" aria-label="Thumbnail {{ forloop.index }}">
+              <img src="{{ media | image_url: width: 140 }}" alt="{{ media.alt | default: pavan_prod.title | escape }}" width="70" height="70" style="object-fit: contain; display: block;">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
 
     <!-- Right Column: Product Info & Dynamic Blocks -->
@@ -66,9 +61,11 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'vendor' %}
-            <div class="product-block-item" {{ block.shopify_attributes }} style="margin-top: 8px;">
-              <span style="font-size: 11px; font-weight: 700; color: var(--secondary); letter-spacing: 1.5px; text-transform: uppercase;">{{ block.settings.text | default: "PAVAN AGRO FOODS • ALUVA, KERALA" | escape }}</span>
-            </div>
+            {% if pavan_prod.vendor != blank %}
+              <div class="product-block-item" {{ block.shopify_attributes }} style="margin-top: 8px;">
+                <span style="font-size: 11px; font-weight: 700; color: var(--secondary); letter-spacing: 1.5px; text-transform: uppercase;">{{ pavan_prod.vendor | escape }}</span>
+              </div>
+            {% endif %}
 
           {% when 'title' %}
             <div class="product-block-item" {{ block.shopify_attributes }}>
@@ -76,80 +73,55 @@
                 {% if block.settings.title_text != blank %}
                   {{ block.settings.title_text | escape }}
                 {% else %}
-                  {{ pavan_prod.title | default: "Pavan Steamed Puttu Podi" }}
+                  {{ pavan_prod.title | escape }}
                 {% endif %}
               </h1>
             </div>
 
           {% when 'subtitle' %}
-            <div class="product-block-item" {{ block.shopify_attributes }}>
-              <p class="malayalam-subtitle">{{ block.settings.text | default: "പാകത്തിൽ സ്റ്റീം ചെയ്ത പ്രീമിയം പുട്ടുപൊടി" | escape }}</p>
-            </div>
+            {% if block.settings.text != blank %}
+              <div class="product-block-item" {{ block.shopify_attributes }}>
+                <p class="malayalam-subtitle">{{ block.settings.text | escape }}</p>
+              </div>
+            {% endif %}
 
           {% when 'price' %}
             <div class="product-block-item" {{ block.shopify_attributes }}>
               <div class="price-card">
-                <span class="curr-price" id="ProductPrice">{{ current_variant.price | default: 8900 | money }}</span>
-                <span class="mrp-price" id="MrpPrice">{{ block.settings.mrp_price | default: "₹99.00" | escape }}</span>
-                <span class="save-badge">SAVE 10%</span>
+                {% assign curr_price_fmt = current_variant.price | money | replace: 'Rs.', '₹' | replace: 'Rs', '₹' %}
+                <span class="curr-price" id="ProductPrice">{{ curr_price_fmt }}</span>
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  {% assign mrp_price_fmt = current_variant.compare_at_price | money | replace: 'Rs.', '₹' | replace: 'Rs', '₹' %}
+                  <span class="mrp-price" id="MrpPrice">{{ mrp_price_fmt }}</span>
+                  <span class="save-badge">SAVE {{ current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price }}%</span>
+                {% endif %}
               </div>
             </div>
 
           {% when 'variant_picker' %}
-            <div class="product-block-item" {{ block.shopify_attributes }}>
-              <label style="display: block; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; color: var(--text-main);">Select Pack Size:</label>
-              <div class="variant-selector-grid" id="PavanVariantPicker">
-                {% if pavan_prod.variants.size > 1 and pavan_prod.has_only_default_variant == false %}
+            {% if pavan_prod.has_only_default_variant == false or pavan_prod.variants.size > 1 %}
+              <div class="product-block-item" {{ block.shopify_attributes }}>
+                <label style="display: block; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; color: var(--text-main);">Select Variant:</label>
+                <div class="variant-selector-grid" id="PavanVariantPicker">
                   {% for variant in pavan_prod.variants %}
+                    {% assign v_price_fmt = variant.price | money | replace: 'Rs.', '₹' | replace: 'Rs', '₹' %}
+                    {% assign v_cmp_fmt = variant.compare_at_price | money | replace: 'Rs.', '₹' | replace: 'Rs', '₹' %}
                     <div class="v-card-box {% if variant.id == current_variant.id %}selected{% endif %} {% unless variant.available %}disabled-variant{% endunless %}"
                          data-variant-id="{{ variant.id }}"
-                         data-price="{{ variant.price | money }}"
-                         data-compare-at-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                         data-price="{{ v_price_fmt }}"
+                         data-compare-at-price="{% if variant.compare_at_price > variant.price %}{{ v_cmp_fmt }}{% endif %}"
                          data-available="{% if variant.available %}true{% else %}false{% endif %}"
                          onclick="selectProductVariant(this);">
                       <strong>{{ variant.title | escape }}</strong><br>
-                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">{{ variant.price | money }}</span>
+                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">{{ v_price_fmt }}</span>
                     </div>
                   {% endfor %}
-                {% else %}
-                  {% assign v1_title = block.settings.v1 | default: "1 Kg Pack" %}
-                  {% assign v2_title = block.settings.v2 | default: "2 Kg Pack" %}
-                  {% assign v3_title = block.settings.v3 | default: "5 Kg Family" %}
-                  <div class="v-card-box selected"
-                       data-variant-id="{{ current_variant.id | default: 46029367541830 }}"
-                       data-price="{{ current_variant.price | default: 8900 | money }}"
-                       data-compare-at-price="₹99.00"
-                       data-available="true"
-                       onclick="selectProductVariant(this);">
-                    <strong>{{ v1_title | escape }}</strong><br>
-                    <span style="font-size: 13px; color: var(--primary); font-weight: 700;">{{ current_variant.price | default: 8900 | money }}</span>
-                  </div>
-                  {% if v2_title != blank %}
-                    <div class="v-card-box"
-                         data-variant-id="{{ current_variant.id | default: 46029367541830 }}"
-                         data-price="₹170.00"
-                         data-compare-at-price="₹190.00"
-                         data-available="true"
-                         onclick="selectProductVariant(this);">
-                      <strong>{{ v2_title | escape }}</strong><br>
-                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹170.00</span>
-                    </div>
-                  {% endif %}
-                  {% if v3_title != blank %}
-                    <div class="v-card-box"
-                         data-variant-id="{{ current_variant.id | default: 46029367541830 }}"
-                         data-price="₹410.00"
-                         data-compare-at-price="₹450.00"
-                         data-available="true"
-                         onclick="selectProductVariant(this);">
-                      <strong>{{ v3_title | escape }}</strong><br>
-                      <span style="font-size: 13px; color: var(--primary); font-weight: 700;">₹410.00</span>
-                    </div>
-                  {% endif %}
-                {% endif %}
+                </div>
+                <input type="hidden" id="SelectedVariantId" name="id" value="{{ current_variant.id }}">
               </div>
-              <input type="hidden" id="SelectedVariantId" name="id" value="{{ current_variant.id | default: 46029367541830 }}">
-            </div>
+            {% else %}
+              <input type="hidden" id="SelectedVariantId" name="id" value="{{ current_variant.id }}">
+            {% endif %}
 
           {% when 'quantity' %}
             <div class="product-block-item" {{ block.shopify_attributes }} style="margin: 16px 0;">
@@ -196,6 +168,7 @@
 {
   "name": "Pavan Main Product Hero",
   "settings": [
+    { "type": "product", "id": "product", "label": "Product Override" },
     { "type": "checkbox", "id": "show_badge", "label": "Show Badge Tag", "default": true },
     { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "BESTSELLER" },
     { "type": "text", "id": "cert_text", "label": "Certification Text", "default": "FSSAI REGISTERED" }

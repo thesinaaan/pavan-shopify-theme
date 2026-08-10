@@ -430,9 +430,10 @@ details summary .acc-icon { transition: transform 0.25s ease; }
 }
 
 @media (max-width: 768px) {
-  .site-header { padding: 12px 16px; }
-  .page-width { padding: 0 16px; }
-  .sec-padding { padding: 40px 0; }
+  .site-header { padding: 12px 20px; }
+  .page-width { padding: 0 20px !important; box-sizing: border-box; width: 100%; }
+  .hero-details-wrap { padding: 0 4px; box-sizing: border-box; }
+  .sec-padding { padding: 36px 0; }
   .sec-title { font-size: 24px; letter-spacing: -0.3px; }
   .hero-title { font-size: 26px; }
   .malayalam-subtitle { font-size: 15px; margin-bottom: 14px; }

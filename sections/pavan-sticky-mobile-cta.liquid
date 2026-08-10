@@ -3,19 +3,20 @@
   Appears at bottom of screen on both Desktop & Mobile when user scrolls down
 {% endcomment %}
 
-{% assign pavan_prod = all_products['pavan-steamed-puttu-podi'] | default: product %}
+{% assign pavan_prod = section.settings.product | default: product | default: collections.all.products.first %}
 {% assign current_variant = pavan_prod.selected_or_first_available_variant | default: pavan_prod.variants.first %}
 
 <div id="PavanStickyBar" class="pavan-sticky-bar">
   <div class="pavan-sticky-container">
     <div class="pavan-sticky-product-info">
-      <img src="{{ 'puttu-pack-front.jpg' | asset_url }}" alt="{{ pavan_prod.title | default: 'Pavan Steamed Puttu Podi' | escape }}" width="44" height="44" class="pavan-sticky-thumb">
+      <img src="{{ current_variant.featured_media | default: pavan_prod.featured_media | image_url: width: 100 }}" alt="{{ pavan_prod.title | escape }}" width="44" height="44" class="pavan-sticky-thumb">
       <div class="pavan-sticky-text-wrap">
-        <div class="pavan-sticky-title">{{ pavan_prod.title | default: "Pavan Steamed Puttu Podi" | escape }}</div>
+        <div class="pavan-sticky-title">{{ pavan_prod.title | escape }}</div>
         <div class="pavan-sticky-meta">
-          <span class="pavan-sticky-stars">★★★★★</span>
-          <span class="pavan-sticky-price" id="StickyBarPrice">{{ current_variant.price | default: 8900 | money }}</span>
-          <span class="pavan-sticky-mrp">₹99.00</span>
+          {% assign sticky_price_fmt = current_variant.price | money | replace: 'Rs.', '₹' | replace: 'Rs', '₹' %}
+          {% assign sticky_cmp_fmt = current_variant.compare_at_price | money | replace: 'Rs.', '₹' | replace: 'Rs', '₹' %}
+          <span class="pavan-sticky-price" id="StickyBarPrice">{{ sticky_price_fmt }}</span>
+          <span class="pavan-sticky-mrp">{% if current_variant.compare_at_price > current_variant.price %}{{ sticky_cmp_fmt }}{% endif %}</span>
         </div>
       </div>
     </div>

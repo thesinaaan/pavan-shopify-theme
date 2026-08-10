@@ -46,12 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Helper to resolve current variant ID
 function getSelectedVariantId() {
   if (selectedVariantId) return selectedVariantId;
   var hiddenInput = document.getElementById('SelectedVariantId');
-  if (hiddenInput) return hiddenInput.value;
-  return '46029367541830';
+  return hiddenInput ? hiddenInput.value : null;
 }
 
 // Helper to resolve selected quantity
@@ -211,7 +209,7 @@ function pavanAddToCart(customVariantId, customQty) {
           b.innerText = count;
         });
 
-        var title = itemData.title || itemData.items?.[0]?.title || 'Pavan Steamed Puttu Podi';
+        var title = itemData.title || itemData.product_title || 'Item';
         showPavanToast('Added "' + title + '" to cart!', false);
       });
   })

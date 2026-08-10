@@ -15,11 +15,11 @@
     <div class="real-banner-box">
       <img 
         src="{{ 'pavan-why-stands-out.png' | asset_url }}" 
-        alt="Why Pavan Steamed Puttu Podi Stands Out - Features Comparison" 
-        width="800"
-        height="533"
-        loading="lazy"
-        onclick="openPavanLightbox('{{ 'pavan-why-stands-out.png' | asset_url }}', 'Why Pavan Steamed Puttu Podi Stands Out')">
+        alt="{{ product.title | escape }} - Features Comparison" 
+        width="600" 
+        height="400" 
+        loading="lazy" 
+        onclick="openPavanLightbox('{{ 'pavan-why-stands-out.png' | asset_url }}', '{{ product.title | escape }} Features Comparison')">
       <p style="font-size: 13px; color: var(--text-light); margin-top: 10px; margin-bottom: 0;">Tap image to view high-resolution features infograph.</p>
     </div>
 

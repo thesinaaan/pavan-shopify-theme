@@ -16,11 +16,11 @@
       <div class="real-banner-box">
         <img 
           src="{{ 'pavan-trusted-quality.png' | asset_url }}" 
-          alt="Pavan Steamed Puttu Podi - Trusted Quality Certifications Banner" 
+          alt="{{ product.title | escape }} - Trusted Quality Certifications Banner" 
           width="800"
           height="533"
           loading="lazy"
-          onclick="openPavanLightbox('{{ 'pavan-trusted-quality.png' | asset_url }}', 'Pavan Steamed Puttu Podi - Trusted Quality Certifications')">
+          onclick="openPavanLightbox('{{ 'pavan-trusted-quality.png' | asset_url }}', '{{ product.title | escape }} - Trusted Quality Certifications')">
         <p style="font-size: 13px; color: var(--text-light); margin-top: 10px; margin-bottom: 0;">Tap certificate banner to enlarge lab test standards & FSSAI / ISO certification.</p>
       </div>
 
