@@ -12,10 +12,14 @@
     <script src="{{ 'pavan-product.js' | asset_url }}" defer="defer"></script>
   </head>
   <body>
+    <div class="announcement-bar" style="background: #000000; color: #ffffff; text-align: center; padding: 8px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">
+      Free Shipping on Orders Over ₹499 • Ships Fresh from Aluva, Kerala
+    </div>
+
     <header class="site-header">
       <div class="site-header-container">
         <a href="{{ routes.root_url }}" class="logo-link" style="display: flex; align-items: center;">
-          <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="140" height="40" style="height: 36px; width: auto; object-fit: contain;">
+          <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="180" height="52" class="header-logo-img">
         </a>
         <div class="header-actions" style="display: flex; align-items: center;">
           <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Shopping Cart" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #18181b; text-decoration: none;">
