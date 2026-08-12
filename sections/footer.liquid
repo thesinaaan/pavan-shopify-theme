@@ -1,57 +1,436 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+{% comment %}
+  Section: Premium Brand Footer (Inspired by Two Brothers India Farms)
+{% endcomment %}
+
+<footer class="pavan-footer">
+  <div class="pavan-footer-container">
+    
+    <!-- Left Column: Brand Logo & Mission -->
+    <div class="pavan-footer-col pavan-footer-brand">
+      <a href="{{ routes.root_url }}" class="pavan-footer-logo-link" onclick="event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });">
+        <img src="{{ 'pavan-logo.png' | asset_url }}" alt="{{ shop.name }}" width="180" height="52" loading="lazy" class="pavan-footer-logo">
+      </a>
+      <p class="pavan-footer-mission">
+        Authentic Kerala Puttu Podi & traditional food staples, steam-roasted to perfection with heritage in Aluva, Kerala.
+      </p>
+      <div class="pavan-footer-badges">
+        <span class="pavan-footer-badge">🌿 100% Natural Ingredients</span>
+        <span class="pavan-footer-badge">🔥 Controlled Temperature Steam Roasted</span>
+        <span class="pavan-footer-badge">✨ Zero Added Preservatives</span>
+      </div>
+    </div>
+
+    <!-- Center Column: Movement, Newsletter & Navigation Links -->
+    <div class="pavan-footer-col pavan-footer-center">
+      <span class="pavan-footer-eyebrow">AUTHENTICALLY CRAFTED KERALA FOOD</span>
+      <h3 class="pavan-footer-heading">Subscribe for special offers, recipes and traditional Kerala updates</h3>
+      
+      <!-- Newsletter Form -->
+      <form onsubmit="event.preventDefault(); const email = this.querySelector('input').value; if(email){ alert('Thank you for subscribing to Pavan Foods!'); this.reset(); }" class="pavan-newsletter-form">
+        <input type="email" placeholder="Your e-mail address" required class="pavan-newsletter-input" aria-label="Your e-mail address">
+        <button type="submit" class="pavan-newsletter-btn" aria-label="Subscribe">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <!-- Navigation & Links Group -->
+      <div class="pavan-footer-nav-group">
+        <div class="pavan-footer-nav-col">
+          <h4>CATEGORIES</h4>
+          <ul>
+            <li><a href="#PavanMainProduct">Puttu Podi (1kg)</a></li>
+            <li><a href="#PavanServingSection">Serving Ideas</a></li>
+            <li><a href="#PavanCookingGuide">Cooking Guide</a></li>
+            <li><a href="#PavanCertificationsSection">Quality Testing</a></li>
+          </ul>
+        </div>
+        <div class="pavan-footer-nav-col">
+          <h4>GENERAL</h4>
+          <ul>
+            <li><a href="#PavanWhyChooseSection">Why Choose Pavan</a></li>
+            <li><a href="#PavanFaqSection">FAQs & Support</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="pavan-footer-nav-col">
+          <h4>CONNECT</h4>
+          <div class="pavan-social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://whatsapp.com" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Corporate & Facility Info -->
+    <div class="pavan-footer-col pavan-footer-corporate">
+      <h4 class="pavan-corp-title">PAVAN FOOD PRODUCTS PRIVATE LIMITED</h4>
+      <p class="pavan-corp-cin">(CIN): U15400KL2019PTC058921</p>
+      
+      <div class="pavan-corp-address">
+        <p><strong>Milled Facility & Factory:</strong></p>
+        <p>Bank Junction, Market Road, Aluva,</p>
+        <p>Ernakulam, Kerala - 683101</p>
+      </div>
+
+      <div class="pavan-corp-contact">
+        <p><strong>Email:</strong> <a href="mailto:info@pavanfoods.com">info@pavanfoods.com</a></p>
+        <p><strong>Tel:</strong> <a href="tel:+919876543210">7406753753</a></p>
+        <p><strong>Grievances:</strong> <a href="tel:+919876543210">7406753753</a></p>
+        <p><strong>FSSAI Lic. No:</strong> 11321007000412</p>
+      </div>
+    </div>
+
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+  <!-- Bottom Copyright & Legal Sub-Footer -->
+  <div class="pavan-footer-bottom">
+    <div class="pavan-footer-bottom-container">
+      <div class="pavan-copyright">
+        © {{ 'now' | date: "%Y" }} PAVAN FOOD PRODUCTS PVT. LTD. All Rights Reserved. Pure. Authentic. Hygienic.
+      </div>
+      <div class="pavan-payment-icons">
+        <span class="pay-tag">Verified Quality Store</span>
+        <span class="pay-badge">UPI</span>
+        <span class="pay-badge">GPay</span>
+        <span class="pay-badge">Visa</span>
+        <span class="pay-badge">Mastercard</span>
+      </div>
+    </div>
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
+  .pavan-footer {
+    background: #FAF8F5;
+    color: #27272a;
+    padding: 60px 20px 0;
+    border-top: 1px solid #E8E2D8;
+    font-family: var(--font-primary--family, sans-serif);
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pavan-footer-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    gap: 40px;
+    padding-bottom: 50px;
+  }
+
+  /* Left Column */
+  .pavan-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pavan-footer-logo-link {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .pavan-footer-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .pavan-footer-mission {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #52525b;
+    margin: 0;
+  }
+
+  .pavan-footer-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .pavan-footer-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2d5a27;
+    background: rgba(45, 90, 39, 0.08);
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  /* Center Column */
+  .pavan-footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .pavan-footer-eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #2d5a27;
+    text-transform: uppercase;
+  }
+
+  .pavan-footer-heading {
+    font-family: var(--font-heading, inherit);
+    font-size: 20px;
+    font-weight: 700;
+    color: #18181b;
+    margin: 0;
+    max-width: 480px;
+    line-height: 1.35;
+  }
+
+  /* Newsletter Form */
+  .pavan-newsletter-form {
+    display: flex;
+    width: 100%;
+    max-width: 440px;
+    border: 1px solid #D4CEC3;
+    border-radius: 30px;
+    background: #ffffff;
+    padding: 4px 6px 4px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    margin-top: 4px;
+  }
+
+  .pavan-newsletter-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: #18181b;
+  }
+
+  .pavan-newsletter-input::placeholder {
+    color: #a1a1aa;
+  }
+
+  .pavan-newsletter-btn {
+    background: #18181b;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .pavan-newsletter-btn:hover {
+    background: #D96B27;
+    transform: scale(1.05);
+  }
+
+  /* Nav Links Group */
+  .pavan-footer-nav-group {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 18px;
+    border-top: 1px dashed #E2DCD2;
+    text-align: left;
+  }
+
+  .pavan-footer-nav-col h4 {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #18181b;
+    margin: 0 0 10px 0;
+  }
+
+  .pavan-footer-nav-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pavan-footer-nav-col a {
+    color: #52525b;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .pavan-footer-nav-col a:hover {
+    color: #D96B27;
+  }
+
+  .pavan-social-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .pavan-social-icons a {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #EFECE6;
+    color: #27272a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .pavan-social-icons a:hover {
+    background: #2d5a27;
+    color: #ffffff;
+  }
+
+  /* Right Column */
+  .pavan-footer-corporate {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #52525b;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #E8E2D8;
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .pavan-corp-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #18181b;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .pavan-corp-cin {
+    font-size: 11px;
+    color: #71717a;
+    margin: 0 0 4px 0;
+  }
+
+  .pavan-corp-address p,
+  .pavan-corp-contact p {
+    margin: 0;
+  }
+
+  .pavan-corp-contact a {
+    color: #2d5a27;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* Bottom Bar */
+  .pavan-footer-bottom {
+    background: #EFECE6;
+    border-top: 1px solid #E2DCD2;
+    padding: 16px 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .pavan-footer-bottom-container {
+    max-width: 1240px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: #71717a;
   }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
+
+  .pavan-payment-icons {
     display: flex;
-    gap: 1rem;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .pay-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #2d5a27;
+    margin-right: 4px;
+  }
+
+  .pay-badge {
+    background: #ffffff;
+    border: 1px solid #D4CEC3;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #27272a;
+  }
+
+  /* Responsive Mobile Layout */
+  @media (max-width: 990px) {
+    .pavan-footer-container {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      text-align: center;
+    }
+
+    .pavan-footer-brand {
+      align-items: center;
+      text-align: center;
+    }
+
+    .pavan-footer-nav-group {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .pavan-footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pavan-footer-bottom-container {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.footer",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
-      "default": true
-    }
-  ]
+  "name": "Footer",
+  "settings": []
 }
 {% endschema %}
