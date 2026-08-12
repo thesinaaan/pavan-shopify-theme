@@ -397,10 +397,15 @@
 
   /* Responsive Mobile Layout */
   @media (max-width: 990px) {
+    .pavan-footer {
+      padding: 40px 16px 100px;
+    }
+
     .pavan-footer-container {
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 32px;
       text-align: center;
+      padding-bottom: 32px;
     }
 
     .pavan-footer-brand {
@@ -408,22 +413,81 @@
       text-align: center;
     }
 
-    .pavan-footer-nav-group {
-      flex-direction: column;
-      gap: 20px;
+    .pavan-footer-badges {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pavan-footer-center {
       align-items: center;
       text-align: center;
     }
 
-    .pavan-footer-nav-col {
-      display: flex;
-      flex-direction: column;
+    .pavan-footer-heading {
+      font-size: 18px;
+    }
+
+    .pavan-newsletter-form {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .pavan-footer-nav-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      text-align: left;
+      width: 100%;
+      padding-top: 20px;
+    }
+
+    .pavan-footer-nav-col h4 {
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .pavan-footer-nav-col a {
+      font-size: 12px;
+    }
+
+    .pavan-social-icons {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .pavan-footer-corporate {
+      text-align: center;
       align-items: center;
+      padding: 18px 14px;
     }
 
     .pavan-footer-bottom-container {
       flex-direction: column;
       text-align: center;
+      gap: 10px;
+    }
+
+    .pavan-payment-icons {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .pavan-footer-nav-group {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 12px;
+    }
+
+    .pavan-footer-heading {
+      font-size: 16px;
+    }
+
+    .pavan-footer-badge {
+      font-size: 11px;
+      padding: 4px 10px;
     }
   }
 {% endstylesheet %}
