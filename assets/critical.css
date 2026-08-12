@@ -98,7 +98,7 @@ body {
 }
 
 .shopify-section {
-  --page-w: var(--page-width, 1200px);
+  --page-w: var(--page-width, 1440px);
   --page-m: var(--page-margin, 16px);
   --content-width: min(
     calc(var(--page-w) - var(--page-m) * 2),
