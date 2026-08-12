@@ -98,15 +98,15 @@
         "pairing_RAewBH": {
           "type": "pairing",
           "settings": {
-            "icon": "🍛",
-            "title": "Kadala Curry",
+            "image_filename": "serving-kadala-curry.png",
+            "title": "Puttu with Kadala Curry",
             "description": "Classic roasted coconut black chickpea curry."
           }
         },
         "pairing_XFptdC": {
           "type": "pairing",
           "settings": {
-            "icon": "🍌",
+            "image_filename": "serving-steamed-nendran.png",
             "title": "Steamed Nendran",
             "description": "Sweet ripe Kerala plantain & fine sugar."
           }
@@ -114,7 +114,7 @@
         "pairing_rVTeAw": {
           "type": "pairing",
           "settings": {
-            "icon": "🧈",
+            "image_filename": "serving-pure-cow-ghee.png",
             "title": "Pure Cow Ghee",
             "description": "Golden melted ghee drizzled over hot puttu."
           }
@@ -122,15 +122,15 @@
         "pairing_ffHajt": {
           "type": "pairing",
           "settings": {
-            "icon": "🥥",
-            "title": "Fresh Coconut",
-            "description": "Juicy freshly grated coconut layers."
+            "image_filename": "serving-veg-stew.png",
+            "title": "Puttu + Vegetable Stew",
+            "description": "Mild aromatic coconut milk gravy with garden veggies."
           }
         },
         "pairing_BU6hjm": {
           "type": "pairing",
           "settings": {
-            "icon": "🍳",
+            "image_filename": "serving-egg-roast.png",
             "title": "Kerala Egg Roast",
             "description": "Rich caramelized onion & egg gravy."
           }
